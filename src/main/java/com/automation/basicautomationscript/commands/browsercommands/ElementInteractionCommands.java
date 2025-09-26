@@ -14,11 +14,12 @@ public class ElementInteractionCommands {
         driver.manage().window().maximize();
         driver.navigate().to("https://www.bing.com/");
         driver.findElement(By.name("q")).sendKeys("iphone shops in sri lanka");
-        driver.findElement(By.id("search_icon")).click();
+        driver.findElement(By.name("q")).submit();
         Thread.sleep(3000);
         List<WebElement> elements = driver.findElements(By.cssSelector("[class='b_maglistcard'] h2"));
-                for(WebElement element : elements){
-                    System.out.println(element.getText());
+        for(WebElement element : elements){
+            System.out.println(element.getText());
         }
+
     }
 }
