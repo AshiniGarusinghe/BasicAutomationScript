@@ -10,7 +10,8 @@ public class MouseActionCommands {
     public static void main(String[] args){
         //testDoubleClickAction();
         //testContextClickAction();
-        testSliderAction();
+        //testSliderAction();
+        testMouseHover();
 
 
     }
@@ -60,6 +61,22 @@ public class MouseActionCommands {
         actions.clickAndHold(slider).moveByOffset(5,0).release().build().perform();
 
         System.out.println("New Value: "+value.getText());
+    }
+
+    public static void testMouseHover(){
+        WebDriver driver = WebDriverManager.chromedriver().create();
+        driver.manage().window().maximize();
+        driver.get("https://ecommerce-playground.lambdatest.io/");
+
+        WebElement megaMenu = driver.findElement(By.xpath("//span[contains(text(),'Mega Menu')]"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(megaMenu).build().perform();
+
+        WebElement apple =driver.findElement(By.linkText("Apple"));
+        apple.click();
+
+        System.out.println(driver.findElement(By.xpath("//h1[text()='Apple']")).getText());
+
     }
 
 
