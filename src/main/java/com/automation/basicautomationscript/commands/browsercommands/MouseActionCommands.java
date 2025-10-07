@@ -1,6 +1,7 @@
 package com.automation.basicautomationscript.commands.browsercommands;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,8 @@ import org.openqa.selenium.interactions.Actions;
 
 public class MouseActionCommands {
     public static void main(String[] args){
-        testDoubleClickAction();
+        //testDoubleClickAction();
+        testContextClickAction();
 
     }
 
@@ -26,6 +28,20 @@ public class MouseActionCommands {
         WebElement textarea = driver.findElement(By.tagName("textarea"));
         String value = textarea.getAttribute("value");
         System.out.println(value);
+    }
+
+    public static void testContextClickAction(){
+        WebDriver driver = WebDriverManager.chromedriver().create();
+        driver.manage().window().maximize();
+        driver.get("https://www.lambdatest.com/selenium-playground/context-menu");
+
+        WebElement rightClickBox = driver.findElement(By.id("hot-spot"));
+        Actions actions = new Actions(driver);
+        actions.contextClick(rightClickBox).perform();
+
+        Alert alert = driver.switchTo().alert();
+        System.out.println(alert.getText());
+        alert.accept();
     }
 
 }
